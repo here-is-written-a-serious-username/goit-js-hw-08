@@ -23,22 +23,40 @@ function onFormSubmit(event) {
     event.preventDefault();
     console.log(formValue);
     event.target.reset();
-    localStorage.removeItem(FORM_KEY);    
+    localStorage.removeItem(FORM_KEY);  
+    formValue = {};
 };
+
+
 
 function afterPageReload() {
     // let someThing={};
-    try {
-        formValue = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
-        // console.log(formValue);
-    } catch (error) {
-        console.error("Get state error: ", error.message);
+
+    formValue = JSON.parse(localStorage.getItem(FORM_KEY));
+
+    if (formValue === null) {
+        //console.log(savedMessage);
+        return;
     }
-    
-    if (formValue) {
-        email.value = formValue.email;
-        message.value = formValue.message;
-    }
+    email.value = formValue.email || '';
+    message.value = formValue.message || '';
 }
+
+
+
+// function afterPageReload() {
+//     // let someThing={};
+//     try {
+//         formValue = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
+//         console.log(formValue);
+//     } catch (error) {
+//         console.error("Get state error: ", error.message);
+//     }
+    
+//     if (formValue) {
+//         email.value = formValue.email;
+//         message.value = formValue.message;
+//     }
+// }
 
 
