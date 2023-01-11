@@ -30,16 +30,15 @@ function onFormSubmit(event) {
 
 
 function afterPageReload() {
-    // let someThing={};
+    let someThing = JSON.parse(localStorage.getItem(FORM_KEY));
 
-    formValue = JSON.parse(localStorage.getItem(FORM_KEY));
-
-    if (formValue === null) {
-        //console.log(savedMessage);
+    if (someThing === null) {
+        console.log(someThing);
         return;
     }
-    email.value = formValue.email || '';
-    message.value = formValue.message || '';
+
+    email.value = someThing.email || '';
+    message.value = someThing.message || '';
 }
 
 
