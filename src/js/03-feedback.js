@@ -5,7 +5,7 @@ const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 const submit = document.querySelector('[type="submit"]');
 const FORM_KEY = 'feedback-form-state';
-const formValue = {};
+let formValue = {};
 
 
 form.addEventListener('input', throttle(onFormInput, 500));
@@ -27,16 +27,17 @@ function onFormSubmit(event) {
 };
 
 function afterPageReload() {
-    let someThing={};
+    // let someThing={};
     try {
-        someThing = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
+        formValue = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
+        // console.log(formValue);
     } catch (error) {
         console.error("Get state error: ", error.message);
     }
     
-    if (someThing) {
-        email.value = someThing.email;
-        message.value = someThing.message;
+    if (formValue) {
+        email.value = formValue.email;
+        message.value = formValue.message;
     }
 }
 
