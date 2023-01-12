@@ -5,7 +5,7 @@ const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 const submit = document.querySelector('[type="submit"]');
 const FORM_KEY = 'feedback-form-state';
-let formValue;
+let formValue = {};
 
 
 form.addEventListener('input', throttle(onFormInput, 500));
@@ -13,8 +13,7 @@ form.addEventListener('submit', onFormSubmit);
 
 afterPageReload();
 
-function onFormInput() {
-    let formValue = {};
+function onFormInput() {    
     formValue.email = email.value;
     formValue.message = message.value;
     localStorage.setItem(FORM_KEY, JSON.stringify(formValue));
