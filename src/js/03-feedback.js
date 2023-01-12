@@ -5,7 +5,7 @@ const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 const submit = document.querySelector('[type="submit"]');
 const FORM_KEY = 'feedback-form-state';
-let formValue = {};
+let formValue;
 
 
 form.addEventListener('input', throttle(onFormInput, 500));
@@ -14,19 +14,20 @@ form.addEventListener('submit', onFormSubmit);
 afterPageReload();
 
 function onFormInput() {
+    let formValue = {};
     formValue.email = email.value;
     formValue.message = message.value;
     localStorage.setItem(FORM_KEY, JSON.stringify(formValue));
 }
 
 function onFormSubmit(event) {
-    event.preventDefault();
+    // formValue;
+    event.preventDefault();    
+    event.currentTarget.reset();
+    let formValue = JSON.parse(localStorage.getItem(FORM_KEY));    
     console.log(formValue);
-    event.target.reset();
-    localStorage.removeItem(FORM_KEY);  
-    formValue = {};
+    localStorage.removeItem(FORM_KEY);
 };
-
 
 
 function afterPageReload() {
@@ -39,23 +40,27 @@ function afterPageReload() {
 
     email.value = someThing.email || '';
     message.value = someThing.message || '';
+    // console.log(someThing);
 }
 
 
 
 // function afterPageReload() {
-//     // let someThing={};
+//     let someThing={};
 //     try {
-//         formValue = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
-//         console.log(formValue);
+//         let someThing = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
+//         console.log(someThing);
 //     } catch (error) {
 //         console.error("Get state error: ", error.message);
 //     }
     
-//     if (formValue) {
-//         email.value = formValue.email;
-//         message.value = formValue.message;
+//     if (!someThing) {
+//         return;
 //     }
+
+//     email.value = someThing.email;
+//     message.value = someThing.message;
+//     console.log(someThing);
 // }
 
 
