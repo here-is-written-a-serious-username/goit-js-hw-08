@@ -12,6 +12,10 @@ form.addEventListener('input', throttle(onFormInput, 500));
 form.addEventListener('submit', onFormSubmit);
 
 afterPageReload();
+// onFormInput();
+// як інший варіант - замість витягувати дані з сховища перед сабмітом, 
+// можна викликати після перезавантаження сторінки onFormInput() - подію інпут, 
+// і як результат я перезапишу formValue і при сабміт відправлю записані в полях дані, а не пустий об’єкт
 
 function onFormInput() {    
     formValue.email = email.value;
@@ -48,12 +52,10 @@ function afterPageReload() {
     // console.log(someThing);
 }
 
-
-
 // function afterPageReload() {
 //     let someThing={};
 //     try {
-//         let someThing = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
+//         someThing = localStorage.getItem(FORM_KEY) === null ? undefined : JSON.parse(localStorage.getItem(FORM_KEY));
 //         console.log(someThing);
 //     } catch (error) {
 //         console.error("Get state error: ", error.message);
