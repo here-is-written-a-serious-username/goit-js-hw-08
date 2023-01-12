@@ -24,7 +24,13 @@ function onFormSubmit(event) {
     // formValue;
     event.preventDefault();    
     event.currentTarget.reset();
-    let formValue = JSON.parse(localStorage.getItem(FORM_KEY));    
+
+    let formValue = JSON.parse(localStorage.getItem(FORM_KEY));  
+    if (formValue === null) {
+        // console.log(someThing);
+        return;
+    }
+      
     console.log(formValue);
     localStorage.removeItem(FORM_KEY);
 };
@@ -34,7 +40,7 @@ function afterPageReload() {
     let someThing = JSON.parse(localStorage.getItem(FORM_KEY));
 
     if (someThing === null) {
-        console.log(someThing);
+        // console.log(someThing);
         return;
     }
 
